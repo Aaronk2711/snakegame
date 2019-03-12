@@ -15,3 +15,29 @@ body {
 canvas {
   background: rgb(51,51,51);
 }
+
+#container
+{
+  height: 400px;
+  position: relative;
+  width: 400px;
+}
+
+.viewport
+{
+  height: 100%;
+  width: 100%;
+}
+
+
+#beginningbutton
+{
+  bottom: 150px;
+  left: 175px;
+  position: absolute;
+  color: grey;
+  background-color: black;
+  height: 100px;
+  width: 100px;
+  border: none;
+}
