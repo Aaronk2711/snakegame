@@ -3,7 +3,7 @@ var boxHeight = 400;
 var padding = 10;
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
-const beginButton = document.getElementById('beginningbutton');
+var beginButton = document.getElementById('beginningbutton');
 drawBoard();
 context.clearRect(0, 0, canvas.width, canvas.height);
   function drawBoard(){
@@ -20,8 +20,9 @@ context.clearRect(0, 0, canvas.width, canvas.height);
     context.stroke();
 }
 
-  function buttonClicked() {
-    beginButton.style.display = "none";
+  function removeButton() {
+    return removeButton.parentNode.removeChild(removeButton);
+}
   }
 
   function gamePlay() {
