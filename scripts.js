@@ -46,7 +46,16 @@ drawBoard();
 
           }
           else {
+            context.clearRect(0, 0, canvas.width, canvas.height);
             xPosition = xPosition - 10;
+            context.beginPath();
+            context.lineWidth = 0;
+            context.strokeStyle = "green";
+            context.rect(xPosition, yPosition, 10, 10);
+            context.fillStyle = "green";
+            context.fill();
+            context.closePath();
+            context.stroke();
           }
           break;
       case 38:
@@ -55,7 +64,17 @@ drawBoard();
 
           }
           else {
+            context.clearRect(0, 0, canvas.width, canvas.height);
             yPosition = yPosition + 10;
+            xPosition = xPosition - 10;
+            context.beginPath();
+            context.lineWidth = 0;
+            context.strokeStyle = "green";
+            context.rect(xPosition, yPosition, 10, 10);
+            context.fillStyle = "green";
+            context.fill();
+            context.closePath();
+            context.stroke();
           }
           break;
       case 39:
@@ -64,13 +83,37 @@ drawBoard();
 
           }
           else {
+            context.clearRect(0, 0, canvas.width, canvas.height);
             xPosition = xPosition + 10;
+            xPosition = xPosition - 10;
+            context.beginPath();
+            context.lineWidth = 0;
+            context.strokeStyle = "green";
+            context.rect(xPosition, yPosition, 10, 10);
+            context.fillStyle = "green";
+            context.fill();
+            context.closePath();
+            context.stroke();
           }
           break;
       case 40:
           //down
           if (yPosition === 400) {
+
+          }
+
+          else {
+            context.clearRect(0, 0, canvas.width, canvas.height);
             yPosition = yPosition + 10;
+            xPosition = xPosition - 10;
+            context.beginPath();
+            context.lineWidth = 0;
+            context.strokeStyle = "green";
+            context.rect(xPosition, yPosition, 10, 10);
+            context.fillStyle = "green";
+            context.fill();
+            context.closePath();
+            context.stroke();
           }
           break;
   }
