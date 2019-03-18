@@ -16,6 +16,7 @@ canvas {
   background: orange;
 }
 
+
 #container
 {
   height: 400px;
@@ -33,7 +34,7 @@ canvas {
 #beginningbutton
 {
   bottom: 150px;
-  left: 175px;
+  left: 238px;
   position: absolute;
   color: grey;
   background-color: black;
