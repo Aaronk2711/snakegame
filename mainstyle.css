@@ -19,9 +19,9 @@ canvas {
 
 #container
 {
-  height: 400px;
+  height: 500px;
   position: relative;
-  width: 400px;
+  width: 500px;
 }
 
 .viewport

@@ -1,8 +1,11 @@
 var boxWidth = 400;
 var boxHeight = 400;
 var padding = 10;
-var xPosition = 10;
-var yPosition = 10;
+var snakePositionX = 10;
+var snakePositionY = 10;
+var applePositionX;
+var applePositionY;
+
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 var beginButton = document.getElementById('beginningbutton');
@@ -31,11 +34,11 @@ drawBoard();
   }
 
   function gamePlay() {
-    firstApple();
+    newApple();
     context.beginPath();
     context.lineWidth = 1;
     context.strokeStyle = "green";
-    context.rect(xPosition, yPosition, 10, 10);
+    context.rect(snakePositionX, snakePositionY, 10, 10);
     context.fillStyle = "green";
     context.fill();
     context.closePath();
@@ -46,97 +49,103 @@ drawBoard();
   switch (e.keyCode) {
       case 37:
           //left
-          if (xPosition === 0) {
+          if (snakePositionX === 0) {
 
           }
          else {
-           context.clearRect(xPosition + 5, yPosition + 5, 6, 6);
-           xPosition = xPosition - 10;
+           context.clearRect(0, 0, canvas.width, canvas.height);
+           snakePositionX = snakePositionX - 10;
            context.beginPath();
            context.lineWidth = 1;
             context.strokeStyle = "green";
-            context.rect(xPosition, yPosition, 10, 10);
+            context.rect(snakePositionX, snakePositionY, 10, 10);
             context.fillStyle = "green";
             context.fill();
             context.closePath();
             context.stroke();
+            redrawApple();
           }
           break;
       case 38:
           //up
-          if (yPosition === 0) {
+          if (snakePositionY === 0) {
 
           }
           else {
-            context.clearRect(xPosition + 5, yPosition + 5, 6, 6);
-            yPosition = yPosition - 10;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            snakePositionY = snakePositionY - 10;
             context.beginPath();
             context.lineWidth = 1;
             context.strokeStyle = "green";
-            context.rect(xPosition, yPosition, 10, 10);
+            context.rect(snakePositionX, snakePositionY, 10, 10);
             context.fillStyle = "green";
             context.fill();
             context.closePath();
             context.stroke();
+            redrawApple();
           }
           break;
       case 39:
           //right
-          if (xPosition === 400) {
+          if (snakePositionX === 400) {
 
           }
           else {
-            context.clearRect(xPosition + 5, yPosition + 5, 6, 6);
-            xPosition = xPosition + 10;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            snakePositionX = snakePositionX + 10;
             context.beginPath();
             context.lineWidth = 1;
             context.strokeStyle = "green";
-            context.rect(xPosition, yPosition, 10, 10);
+            context.rect(snakePositionX, snakePositionY, 10, 10);
             context.fillStyle = "green";
             context.fill();
             context.closePath();
             context.stroke();
+            redrawApple();
           }
           break;
       case 40:
           //down
-          if (yPosition === 400) {
+          if (snakePositionY === 400) {
 
           }
 
           else {
-            context.clearRect(xPosition + 5, yPosition + 5, 6, 6);
-            yPosition = yPosition + 10;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            snakePositionY = snakePositionY + 10;
             context.beginPath();
             context.lineWidth = 1;
             context.strokeStyle = "green";
-            context.rect(xPosition, yPosition, 10, 10);
+            context.rect(snakePositionX, snakePositionY, 10, 10);
             context.fillStyle = "green";
             context.fill();
             context.closePath();
             context.stroke();
+            redrawApple();
           }
           break;
   }
 }
-  
-  function firstApple() {
-  
+
+  function newApple() {
+
     context.beginPath();
-    context.lineWidth = "6";
+    context.lineWidth = "1";
     context.strokeStyle = "red";
-    context.rect(Math.floor((Math.random() * 350) + 200), Math.floor((Math.random() * 350) + 10), 10, 10);
+    applePositionX = Math.floor((Math.random() * 350) + 200);
+    applePositionY = Math.floor((Math.random() * 350) + 10);
+    context.rect(Math.ceil(applePositionX/10)*10, Math.ceil(applePositionY/10)*10, 10, 10);
     context.fillStyle = "red";
     context.fill();
     context.closePath();
     context.stroke();
   }
-  
-  function placeApple() {
+
+  function redrawApple() {
     context.beginPath();
-    context.lineWidth = "6";
+    context.lineWidth = "1";
     context.strokeStyle = "red";
-    context.rect(Math.floor((Math.random() * 390) + 10), Math.floor((Math.random() * 390) + 10), 10, 10);
+    context.rect(Math.ceil(applePositionX/10)*10, Math.ceil(applePositionY/10)*10, 10, 10);
     context.fillStyle = "red";
     context.fill();
     context.closePath();
