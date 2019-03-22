@@ -1,10 +1,11 @@
-var boxWidth = 400;
-var boxHeight = 400;
-var padding = 10;
-var snakePositionX = 10;
-var snakePositionY = 10;
-var applePositionX;
-var applePositionY;
+var boxWidth = 400; //canvas width
+var boxHeight = 400; //canvas height
+var padding = 10; //canvas padding
+var snakePositionX = 10; //position of head
+var snakePositionY = 10; //position of head
+var applePositionX; //position of apple
+var applePositionY; //position of apple
+var direction; //direction the snake is moving
 
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
@@ -46,82 +47,45 @@ drawBoard();
   }
 
   document.onkeydown = function(e) {
-  switch (e.keyCode) {
+    switch (e.keyCode) {
       case 37:
           //left
-          if (snakePositionX === 0) {
+          do {
+            setInterval(moveSnakeLeft, 2000);
+          } while (direction === 'left');
 
-          }
-         else {
-           context.clearRect(0, 0, canvas.width, canvas.height);
-           snakePositionX = snakePositionX - 10;
-           context.beginPath();
-           context.lineWidth = 1;
-            context.strokeStyle = "green";
-            context.rect(snakePositionX, snakePositionY, 10, 10);
-            context.fillStyle = "green";
-            context.fill();
-            context.closePath();
-            context.stroke();
-            redrawApple();
+          if (direction !== 'left') {
+            setInterval(moveSnakeLeft, 0);
           }
           break;
       case 38:
           //up
-          if (snakePositionY === 0) {
+          do {
+            setInterval(moveSnakeUp, 2000);
+          } while (direction === 'up');
 
-          }
-          else {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            snakePositionY = snakePositionY - 10;
-            context.beginPath();
-            context.lineWidth = 1;
-            context.strokeStyle = "green";
-            context.rect(snakePositionX, snakePositionY, 10, 10);
-            context.fillStyle = "green";
-            context.fill();
-            context.closePath();
-            context.stroke();
-            redrawApple();
+          if (direction !== 'up') {
+            setInterval(moveSnakeUp, 0);
           }
           break;
       case 39:
           //right
-          if (snakePositionX === 400) {
+          do {
+            setInterval(moveSnakeRight, 2000);
+          } while (direction === 'right');
 
-          }
-          else {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            snakePositionX = snakePositionX + 10;
-            context.beginPath();
-            context.lineWidth = 1;
-            context.strokeStyle = "green";
-            context.rect(snakePositionX, snakePositionY, 10, 10);
-            context.fillStyle = "green";
-            context.fill();
-            context.closePath();
-            context.stroke();
-            redrawApple();
+          if (direction !== 'right') {
+            setInterval(moveSnakeRight, 0);
           }
           break;
       case 40:
           //down
-          if (snakePositionY === 400) {
+          do {
+            setInterval(moveSnakeDown, 2000);
+          } while (direction === 'down');
 
-          }
-
-          else {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            snakePositionY = snakePositionY + 10;
-            context.beginPath();
-            context.lineWidth = 1;
-            context.strokeStyle = "green";
-            context.rect(snakePositionX, snakePositionY, 10, 10);
-            context.fillStyle = "green";
-            context.fill();
-            context.closePath();
-            context.stroke();
-            redrawApple();
+          if (direction !== 'down') {
+            setInterval(moveSnakeDown, 0);
           }
           break;
   }
@@ -150,4 +114,93 @@ drawBoard();
     context.fill();
     context.closePath();
     context.stroke();
+  }
+
+  function moveSnakeLeft() {
+    if (snakePositionX === 0) {
+
+    }
+   else {
+     direction = 'left';
+     do {
+       context.clearRect(0, 0, canvas.width, canvas.height);
+       snakePositionX = snakePositionX - 10;
+       context.beginPath();
+       context.lineWidth = 1;
+       context.strokeStyle = "green";
+       context.rect(snakePositionX, snakePositionY, 10, 10);
+       context.fillStyle = "green";
+       context.fill();
+       context.closePath();
+       context.stroke();
+       redrawApple();
+    } while ((snakePositionX > 0) && (direction == 'left'))
+    }
+  }
+
+  function moveSnakeUp() {
+    if (snakePositionY === 0) {
+
+    }
+    else {
+      direction = 'up';
+      do {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      snakePositionY = snakePositionY - 10;
+      context.beginPath();
+      context.lineWidth = 1;
+      context.strokeStyle = "green";
+      context.rect(snakePositionX, snakePositionY, 10, 10);
+      context.fillStyle = "green";
+      context.fill();
+      context.closePath();
+      context.stroke();
+      redrawApple();
+    } while ((snakePositionY > 0) && (direction == 'up'))
+    }
+  }
+
+  function moveSnakeRight() {
+    if (snakePositionX === 400) {
+
+    }
+    else {
+      direction = 'right';
+      do {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      snakePositionX = snakePositionX + 10;
+      context.beginPath();
+      context.lineWidth = 1;
+      context.strokeStyle = "green";
+      context.rect(snakePositionX, snakePositionY, 10, 10);
+      context.fillStyle = "green";
+      context.fill();
+      context.closePath();
+      context.stroke();
+      redrawApple();
+    } while ((snakePositionX < 390) && (direction == 'right'))
+  }
+  }
+
+  function moveSnakeDown() {
+    if (snakePositionY === 400) {
+
+    }
+
+    else {
+      direction = 'down';
+      do {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      snakePositionY = snakePositionY + 10;
+      context.beginPath();
+      context.lineWidth = 1;
+      context.strokeStyle = "green";
+      context.rect(snakePositionX, snakePositionY, 10, 10);
+      context.fillStyle = "green";
+      context.fill();
+      context.closePath();
+      context.stroke();
+      redrawApple();
+    } while((snakePositionY < 390) && (direction == 'down'))
+  }
   }
