@@ -51,41 +51,44 @@ drawBoard();
       case 37:
           //left
           do {
-            setInterval(moveSnakeLeft, 2000);
+          var leftInterval = setInterval(moveSnakeLeft, 50);
           } while (direction === 'left');
 
           if (direction !== 'left') {
-            setInterval(moveSnakeLeft, 0);
+            clearInterval(leftInterval);
           }
           break;
+
       case 38:
           //up
           do {
-            setInterval(moveSnakeUp, 2000);
+          var upInterval = setInterval(moveSnakeUp, 50);
           } while (direction === 'up');
 
           if (direction !== 'up') {
-            setInterval(moveSnakeUp, 0);
+          clearInterval(upInterval);
           }
           break;
+
       case 39:
           //right
           do {
-            setInterval(moveSnakeRight, 2000);
+          var rightInterval = setInterval(moveSnakeRight, 50);
           } while (direction === 'right');
 
           if (direction !== 'right') {
-            setInterval(moveSnakeRight, 0);
+          clearInterval(rightInterval);
           }
           break;
+
       case 40:
           //down
           do {
-            setInterval(moveSnakeDown, 2000);
+          var downInterval = setInterval(moveSnakeDown, 50);
           } while (direction === 'down');
 
           if (direction !== 'down') {
-            setInterval(moveSnakeDown, 0);
+          clearInterval(downInterval);
           }
           break;
   }
@@ -117,12 +120,11 @@ drawBoard();
   }
 
   function moveSnakeLeft() {
-    if (snakePositionX === 0) {
+    direction = 'left';
+    if (snakePositionX === 10) {
 
     }
    else {
-     direction = 'left';
-     do {
        context.clearRect(0, 0, canvas.width, canvas.height);
        snakePositionX = snakePositionX - 10;
        context.beginPath();
@@ -134,17 +136,15 @@ drawBoard();
        context.closePath();
        context.stroke();
        redrawApple();
-    } while ((snakePositionX > 0) && (direction == 'left'))
     }
   }
 
   function moveSnakeUp() {
-    if (snakePositionY === 0) {
+    direction = 'up';
+    if (snakePositionY === 10) {
 
     }
     else {
-      direction = 'up';
-      do {
       context.clearRect(0, 0, canvas.width, canvas.height);
       snakePositionY = snakePositionY - 10;
       context.beginPath();
@@ -156,17 +156,15 @@ drawBoard();
       context.closePath();
       context.stroke();
       redrawApple();
-    } while ((snakePositionY > 0) && (direction == 'up'))
     }
   }
 
   function moveSnakeRight() {
-    if (snakePositionX === 400) {
+          direction = 'right';
+    if (snakePositionX === 390) {
 
     }
     else {
-      direction = 'right';
-      do {
       context.clearRect(0, 0, canvas.width, canvas.height);
       snakePositionX = snakePositionX + 10;
       context.beginPath();
@@ -178,18 +176,15 @@ drawBoard();
       context.closePath();
       context.stroke();
       redrawApple();
-    } while ((snakePositionX < 390) && (direction == 'right'))
   }
   }
 
   function moveSnakeDown() {
-    if (snakePositionY === 400) {
+    direction = 'down';
+    if (snakePositionY === 390) {
 
     }
-
     else {
-      direction = 'down';
-      do {
       context.clearRect(0, 0, canvas.width, canvas.height);
       snakePositionY = snakePositionY + 10;
       context.beginPath();
@@ -201,6 +196,5 @@ drawBoard();
       context.closePath();
       context.stroke();
       redrawApple();
-    } while((snakePositionY < 390) && (direction == 'down'))
-  }
+    }
   }
