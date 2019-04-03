@@ -1,5 +1,3 @@
-
-
   var boxWidth = 400; //canvas width
   var boxHeight = 400; //canvas height
   var padding = 10; //canvas padding
@@ -127,11 +125,12 @@
          context.beginPath();
          context.lineWidth = 1;
          context.strokeStyle = "green";
-         for (let j = 0; j <= snakeLength; j++) {
-           context.rect(snakePositionX[j], snakePositionY[j], 10, 10);
+         for (let l = 0; l < snakeLength; l++) {
+           context.rect(snakePositionX[l], snakePositionY[l], 10, 10);
+           context.fillStyle = "green";
+           context.fill();
+           console.log(l);
          }
-         context.fillStyle = "green";
-         context.fill();
          context.closePath();
          context.stroke();
 
@@ -155,11 +154,13 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        for (let j = 0; j <= snakeLength; j++) {
-          context.rect(snakePositionX[j], snakePositionY[j], 10, 10);
+        for (let u = 0; u < snakeLength; u++) {
+          context.rect(snakePositionX[u], snakePositionY[u], 10, 10);
+          context.fillStyle = "green";
+          context.fill();
+          console.log(u);
         }
-        context.fillStyle = "green";
-        context.fill();
+
         context.closePath();
         context.stroke();
       }
@@ -180,8 +181,9 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        for (let j = 0; j <= snakeLength; j++) {
-          context.rect(snakePositionX[j], snakePositionY[j], 10, 10);
+        for (let r = 0; r < snakeLength; r++) {
+          context.rect(snakePositionX[r], snakePositionY[r], 10, 10);
+          console.log(r);
         }
         context.fillStyle = "green";
         context.fill();
@@ -205,9 +207,10 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        for (let j = 0; j <= snakeLength; j++) {
-          context.rect(snakePositionX[j], snakePositionY[j], 10, 10);
+        for (let d = 0; d < snakeLength; d++) {
+          context.rect(snakePositionX[d], snakePositionY[d], 10, 10);
         }
+        console.log(d);
         context.fillStyle = "green";
         context.fill();
         context.closePath();
