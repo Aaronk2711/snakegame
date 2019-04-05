@@ -1,9 +1,9 @@
-  var boxWidth = 400; //canvas width
+var boxWidth = 400; //canvas width
   var boxHeight = 400; //canvas height
   var padding = 10; //canvas padding
   var snakePositionX = [10]; //position of head
   var snakePositionY = [10]; //position of head
-  var snakeLength = 2;
+  var snakeLength = 1;
   var applePositionX; //position of apple
   var applePositionY; //position of apple
   var direction; //direction the snake is moving
@@ -205,7 +205,7 @@
 
     function moveSnakeDown() {
       direction = 'down';
-      if (snakePositionY[snakePositionY.length -1] == 390) {
+      if (snakePositionY[snakePositionY.length - 1] == 390) {
 
       }
       else {
