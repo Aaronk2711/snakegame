@@ -85,7 +85,7 @@
             direction = 'down';
 
             clearInterval(moveSnake);
-            moveSnake = setInterval(moveSnakeDown, 3000);
+            moveSnake = setInterval(moveSnakeDown, 100);
             break;
     }
   }
