@@ -1,13 +1,14 @@
   var boxWidth = 400; //canvas width
   var boxHeight = 400; //canvas height
   var padding = 10; //canvas padding
-  var snakePositionX = [10]; //position of head
-  var snakePositionY = [10]; //position of head
+  var snakePositionX = [10]; //x position of head
+  var snakePositionY = [10]; //y position of head
   var snakeLength = 2;
   var applePositionX; //position of apple
   var applePositionY; //position of apple
   var direction; //direction the snake is moving
   var moveSnake;
+  var gameStarted = false;
   const canvas = document.getElementById("canvas");
   const context = canvas.getContext("2d");
   var beginButton = document.getElementById('beginningbutton');
@@ -31,6 +32,7 @@
   }
 
     function buttonClicked() {
+      gameStarted = true;
       beginButton.style.display = "none";
       gamePlay();
     }
@@ -40,9 +42,8 @@
       context.beginPath();
       context.lineWidth = 1;
       context.strokeStyle = "green";
-      for (var c = 0; c < snakeLength; c++) {
+      for (let c = 0; c < snakeLength; c++) {
         context.rect(snakePositionX[c], snakePositionY[c], 10, 10);
-        console.log(c);
         context.fillStyle = "green";
         context.fill();
       }
@@ -53,39 +54,44 @@
     }
 
     document.onkeydown = function(e) {
-      switch (e.keyCode) {
-
-        case 37:
+      if (gameStarted === true) {
+        switch (e.keyCode) {
+          case 37:
             //left
-            direction = 'left';
+            if (direction !== 'right') {
+              direction = 'left';
+              clearInterval(moveSnake);
+              moveSnake = setInterval(moveSnakeLeft, 100);
+              break;
+            }
 
-            clearInterval(moveSnake);
-            moveSnake = setInterval(moveSnakeLeft, 100);
-            break;
-
-        case 38:
+          case 38:
             //up
-            direction = 'up';
+            if (direction !== 'down') {
+              direction = 'up';
+              clearInterval(moveSnake);
+              moveSnake = setInterval(moveSnakeUp, 100);
+              break;
+            }
 
-            clearInterval(moveSnake);
-            moveSnake = setInterval(moveSnakeUp, 100);
-            break;
-
-        case 39:
+          case 39:
             //right
-            direction = 'right';
+            if (direction !== 'left') {
+              direction = 'right';
+              clearInterval(moveSnake);
+              moveSnake = setInterval(moveSnakeRight, 100);
+              break;
+            }
 
-            clearInterval(moveSnake);
-            moveSnake = setInterval(moveSnakeRight, 100);
-            break;
-
-        case 40:
+          case 40:
             //down
-            direction = 'down';
-
-            clearInterval(moveSnake);
-            moveSnake = setInterval(moveSnakeDown, 100);
-            break;
+            if (direction !== 'up') {
+              direction = 'down';
+              clearInterval(moveSnake);
+              moveSnake = setInterval(moveSnakeDown, 100);
+              break;
+            }
+          }
     }
   }
 
@@ -95,8 +101,10 @@
       context.lineWidth = "1";
       context.strokeStyle = "red";
       applePositionX = Math.floor((Math.random() * 150) + 200);
+      applePositionX = Math.ceil(applePositionX/10) * 10;
       applePositionY = Math.floor((Math.random() * 340) + 10);
-      context.rect(Math.ceil(applePositionX/10)*10, Math.ceil(applePositionY/10)*10, 10, 10);
+      applePositionY = Math.ceil(applePositionY/10) * 10;
+      context.rect(applePositionX, applePositionY, 10, 10);
       context.fillStyle = "red";
       context.fill();
       context.closePath();
@@ -107,7 +115,7 @@
       context.beginPath();
       context.lineWidth = "1";
       context.strokeStyle = "red";
-      context.rect(Math.ceil(applePositionX/10)*10, Math.ceil(applePositionY/10)*10, 10, 10);
+      context.rect(applePositionX, applePositionY, 10, 10);
       context.fillStyle = "red";
       context.fill();
       context.closePath();
@@ -116,7 +124,7 @@
 
     function moveSnakeLeft() {
       direction = 'left';
-      if (snakePositionY[snakePositionX.length - 1] == 0) {
+      if (snakePositionX[snakePositionX.length - 1] == 0) {
           endGame();
       }
       else {
@@ -132,18 +140,14 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        console.log("before loop");
         for (let i = 0; i < snakeLength; i++) {
           context.rect(snakePositionX[snakePositionX.length - 1 - i], snakePositionY[snakePositionY.length - 1 - i], 10, 10);
-          console.log("in loop");
-          console.log(snakePositionX[snakePositionX.length - 1]);
-          console.log(snakePositionY[snakePositionY.length - 1]);
           context.fillStyle = "green";
           context.fill();
         }
-        console.log("after loop");
         context.closePath();
         context.stroke();
+        compare();
       }
     }
 
@@ -165,24 +169,21 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        console.log("before loop");
         for (let i = 0; i < snakeLength; i++) {
           context.rect(snakePositionX[snakePositionX.length - 1 - i], snakePositionY[snakePositionY.length - 1 - i], 10, 10);
-          console.log("in loop");
-          console.log(snakePositionX[snakePositionX.length - 1]);
-          console.log(snakePositionY[snakePositionY.length - 1]);
           context.fillStyle = "green";
           context.fill();
         }
-        console.log("after loop");
         context.closePath();
         context.stroke();
+        compare();
+
       }
     }
 
     function moveSnakeRight() {
       direction = 'right';
-      if (snakePositionY[snakePositionX.length - 1] == 390) {
+      if (snakePositionX[snakePositionX.length - 1] == 390) {
         endGame();
       }
       else {
@@ -198,18 +199,14 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        console.log("before loop");
         for (let i = 0; i < snakeLength; i++) {
           context.rect(snakePositionX[snakePositionX.length - 1 - i], snakePositionY[snakePositionY.length - 1 - i], 10, 10);
-          console.log("in loop");
-          console.log(snakePositionX[snakePositionX.length - 1]);
-          console.log(snakePositionY[snakePositionY.length - 1]);
           context.fillStyle = "green";
           context.fill();
         }
-        console.log("after loop");
         context.closePath();
         context.stroke();
+        compare();
       }
     }
 
@@ -231,29 +228,34 @@
         context.beginPath();
         context.lineWidth = 1;
         context.strokeStyle = "green";
-        console.log("before loop");
         for (let i = 0; i < snakeLength; i++) {
           context.rect(snakePositionX[snakePositionX.length - 1 - i], snakePositionY[snakePositionY.length - 1 - i], 10, 10);
-          console.log("in loop");
-          console.log(snakePositionX[snakePositionX.length - 1]);
-          console.log(snakePositionY[snakePositionY.length - 1]);
           context.fillStyle = "green";
           context.fill();
         }
-        console.log("after loop");
         context.closePath();
         context.stroke();
+        compare();
       }
     }
 
+    function compare() {
+      for (let k = 1; k < snakeLength -2; k++) {
+        if ((snakePositionX[snakePositionX.length -1] == snakePositionX[snakePositionX.length -1 -k]) && (snakePositionY[snakePositionY.length -1] == snakePositionY[snakePositionY.length -1 -k])) {
+          endGame();
+        }
+    }
+  }
+
     function endGame() {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      alert("Well played stupid head");
+      alert("You have died");
       snakePositionY.length = 0;
       snakePositionY.push(10);
       snakePositionX.length = 0;
       snakePositionX.push(10);
+      snakeLength = 2;
       clearInterval(moveSnake);
-      document.getElementById("beginningbutton").style.visibility = "visible";
-      console.log(document.getElementById("beginningbutton").style.visibility);
+      gameStarted = false;
+      beginButton.style.display = 'block';
     }
